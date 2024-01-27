@@ -30,6 +30,9 @@ d1442c19c708   gltest    "flask run --host=0.…"   4 hours ago      Up 4 hours 
 on: http://localhost:3456/isAlive
 Should show "true"
 
+To check prediction:
+$ curl -X POST http://localhost:3456/predict -H "Content-Type: application/json" -d '[8.9,7.0,7.1,7.8]'
+
 # For GCP:
 
 $docker tag gliris gcr.io/iris123-412522/gliris
@@ -42,4 +45,8 @@ $docker push gcr.io/iris123-412522/gliris
 1. Open Google Cloud Console
 2. Create new Project (e.g iris123)
 3. Check the image loaded in container Registry (e.g gliris)
-4. Open Kubernetes Engine -> Kubernetes clusters -> deploy ->  in New container select Existing container image -> give image path (e.g gliris) -> Continue for Configuration -> Continue for Expose (optional) 
+4. Open Kubernetes Engine -> Kubernetes clusters -> deploy ->  in New container select Existing container image -> give image path (e.g gliris) -> Continue for Configuration -> Continue for Expose (optional)
+
+5. Check prediction on external server: My Load Balancer IP-> 35.239.142.220
+
+$curl -X POST 35.239.142.220:80/predict -H "Content-Type: application/json" -d '[8.9,7.0,7.1,7.8]'
